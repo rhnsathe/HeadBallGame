@@ -1,4 +1,6 @@
 #include "gas_simulation_app.h"
+#include "gas_container.h"
+#include "cinder/gl/gl.h"
 
 namespace idealgas {
 

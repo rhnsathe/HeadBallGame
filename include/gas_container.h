@@ -1,6 +1,7 @@
 #pragma once
 
 #include "cinder/gl/gl.h"
+#include "particle.h"
 
 using glm::vec2;
 
@@ -15,7 +16,7 @@ class GasContainer {
   /**
    * TODO: Add more parameters to this constructor, and add documentation.
    */
-  GasContainer();
+  GasContainer(Particle& particle);
 
   /**
    * Displays the container walls and the current positions of the particles.
@@ -27,6 +28,8 @@ class GasContainer {
    * described in the assignment documentation).
    */
   void AdvanceOneFrame();
+
+  void checkCollisions();
 
  private:
   /**

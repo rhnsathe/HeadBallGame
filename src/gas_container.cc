@@ -1,10 +1,12 @@
 #include "gas_container.h"
+#include "cinder/gl/gl.h"
+#include "particle.h"
 
 namespace idealgas {
 
 using glm::vec2;
 
-GasContainer::GasContainer() {
+GasContainer::GasContainer(Particle& particle) {
 
 }
 
@@ -19,5 +21,7 @@ void GasContainer::Display() const {
 void GasContainer::AdvanceOneFrame() {
   ++dummy_variable_;
 }
+
+
 
 }  // namespace idealgas
