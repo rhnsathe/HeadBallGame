@@ -1,7 +1,7 @@
 //
 // Created by Rohan Sathe on 3/13/21.
 //
-#pragma once
+//#pragma once
 #include "cinder/gl/gl.h"
 #include "particle.h"
 
@@ -10,21 +10,22 @@ using glm::vec2;
 namespace idealgas {
 
 Particle::Particle() {
-  int random_x_position = rand() % (abs(kLowerPositionBound) + abs(kHeightAndWidth - kRadius) + 1);
-  int random_y_position = rand() % (abs(kLowerPositionBound) + abs(kHeightAndWidth - kRadius) + 1);
+  double random_x_position = rand() % (abs(kLowerPositionBound) + abs(kHeightAndWidth - kRadius) + 1);
+  double random_y_position = rand() % (abs(kLowerPositionBound) + abs(kHeightAndWidth - kRadius) + 1);
   position_ = glm::vec2(random_x_position, random_y_position);
+
   double random_x_velocity = rand() % kVelocityRange + kLowerVelocityBound;
   double random_y_velocity = rand() % kVelocityRange + kLowerVelocityBound;
   velocity_ = glm::vec2(random_x_velocity, random_y_velocity);
 }
 
-glm::vec2 Particle::getPosition() {
+/*glm::vec2 Particle::getPosition() {
   return position_;
-}
+}*/
 
-glm::vec2 Particle::getVelocity() {
+/*glm::vec2 Particle::getVelocity() {
   return velocity_;
-}
+}*/
 
 void Particle::UpdateOneSecond() {
   UpdateOverall(1.0);
@@ -117,5 +118,7 @@ void Particle::DrawParticle() {
   ci::gl::color(ci::Color("orange"));
   ci::gl::drawSolidCircle(position_, kRadius);
 }
+
+
 
 }

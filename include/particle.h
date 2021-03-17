@@ -3,7 +3,7 @@
 //
 #pragma once
 #include "cinder/gl/gl.h"
-#include "gas_container.h"
+//#include "gas_container.h"
 #include "particle.h"
 
 using glm::vec2;
@@ -12,18 +12,18 @@ namespace idealgas {
   class Particle {
    public:
     Particle();
-    glm::vec2 getPosition();
-    glm::vec2 getVelocity();
+    //glm::vec2 getPosition();
+    //glm::vec2 getVelocity();
     void UpdateOverall(double time);
     void DrawParticle();
-    glm::vec2 position_;
-    glm::vec2 velocity_;
+    glm::vec2 position_ = glm::vec2(0,0);
+    glm::vec2 velocity_ = glm::vec2(0,0);
     const int kRadius = 1;
 
    private:
     const int kHeightAndWidth = 20;
-    const double kLowerVelocityBound = 0.0;
-    const int kVelocityRange= 2;
+    const double kLowerVelocityBound = 2.0;
+    const int kVelocityRange= 8;
     // This variable MUST be equal to kRadius.
     const int kLowerPositionBound = kRadius;
     void UpdateOneSecond();

@@ -14,7 +14,8 @@ namespace idealgas {
 class GasContainer {
  public:
   /**
-   * TODO: Add more parameters to this constructor, and add documentation.
+   * Constructor that takes in whatever number
+   * of particles is necessary for the simulation.
    */
   GasContainer(int num_particles);
 
@@ -29,17 +30,24 @@ class GasContainer {
    */
   void AdvanceOneFrame();
 
+  /**
+   * Checks for potential collisions between particles.
+   */
   void CheckForCollisions();
 
 
  private:
   /**
-   * This variable is just for the purposes of demonstrating how to make a shape move
-   * across a screen. Please remove it once you start working on your code.
+   * Fills with particles with random positions and velocities.
    */
   std::vector<Particle> particles_;
-  int dummy_variable_ = 0;
 
+  /**
+   * Initiates collision between particles.
+   * @param present_index
+   * @param check_index
+   * @param distanceBetweenRadii
+   */
   void CommenceCollision(size_t present_index, size_t check_index, double distanceBetweenRadii);
 };
 
