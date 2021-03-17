@@ -6,8 +6,11 @@ namespace idealgas {
 
 using glm::vec2;
 
-GasContainer::GasContainer(Particle& particle) {
-
+GasContainer::GasContainer(int num_particles) {
+  for (size_t i = 0; i < num_particles; i++) {
+    Particle particle;
+    particles_.push_back(particle);
+  }
 }
 
 void GasContainer::Display() const {
@@ -19,8 +22,13 @@ void GasContainer::Display() const {
 }
 
 void GasContainer::AdvanceOneFrame() {
-  ++dummy_variable_;
+  for (Particle& particle: particles_) {
+    particle.UpdateOverall(1.0);
+  }
+
 }
+
+void CheckForCollisions()
 
 
 

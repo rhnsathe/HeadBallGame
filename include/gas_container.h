@@ -16,7 +16,7 @@ class GasContainer {
   /**
    * TODO: Add more parameters to this constructor, and add documentation.
    */
-  GasContainer(Particle& particle);
+  GasContainer(int num_particles);
 
   /**
    * Displays the container walls and the current positions of the particles.
@@ -29,13 +29,14 @@ class GasContainer {
    */
   void AdvanceOneFrame();
 
-  void checkCollisions();
+  void CheckForCollisions();
 
  private:
   /**
    * This variable is just for the purposes of demonstrating how to make a shape move
    * across a screen. Please remove it once you start working on your code.
    */
+  std::vector<Particle> particles_;
   int dummy_variable_ = 0;
 };
 

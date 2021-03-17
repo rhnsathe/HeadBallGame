@@ -14,11 +14,12 @@ namespace idealgas {
     Particle();
     glm::vec2 getPosition();
     glm::vec2 getVelocity();
+    void UpdateOverall(double time);
+    glm::vec2 position_;
+    glm::vec2 velocity_;
 
 
    private:
-    glm::vec2 position_;
-    glm::vec2 velocity_;
     const int kRadius = 1;
     const int kHeightAndWidth = 20;
     const double kLowerVelocityBound = 0.0;
@@ -26,11 +27,12 @@ namespace idealgas {
     // This variable MUST be equal to kRadius.
     const int kLowerPositionBound = kRadius;
     void UpdateOneSecond();
-    void UpdateOverall(double time);
-    void CollideWithVerticalWalls(double time, double new_x_position, double new_y_position);
-    void CollideWithHorizontalWalls(double time, double new_x_position, double new_y_position);
-    void CollideWithBothWalls(double time, double new_x_position, double new_y_position);
+    void CollideWithVerticalWalls(double time, double x_time_to_collide, double new_x_position, double new_y_position);
+    void CollideWithHorizontalWalls(double time, double y_time_to_collide, double new_x_position, double new_y_position);
+    void CollideWithBothWalls(double time, double x_time_to_collide, double new_x_position, double new_y_position);
     void CollideWithWalls(double time, double new_x_position, double new_y_position);
     bool CheckExistenceOfCollision(double new_x_position, double new_y_position);
+    bool CheckVerticalWalls();
+    bool CheckHorizontalWalls();
   };
 }
