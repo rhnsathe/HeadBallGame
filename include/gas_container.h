@@ -31,6 +31,7 @@ class GasContainer {
 
   void CheckForCollisions();
 
+
  private:
   /**
    * This variable is just for the purposes of demonstrating how to make a shape move
@@ -38,6 +39,8 @@ class GasContainer {
    */
   std::vector<Particle> particles_;
   int dummy_variable_ = 0;
+
+  void CommenceCollision(size_t present_index, size_t check_index, double distanceBetweenRadii);
 };
 
 }  // namespace idealgas

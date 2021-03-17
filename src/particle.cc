@@ -113,4 +113,9 @@ bool Particle::CheckHorizontalWalls() {
   }
 }
 
+void Particle::DrawParticle() {
+  ci::gl::color(ci::Color("orange"));
+  ci::gl::drawSolidCircle(position_, kRadius);
+}
+
 }

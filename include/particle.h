@@ -15,12 +15,12 @@ namespace idealgas {
     glm::vec2 getPosition();
     glm::vec2 getVelocity();
     void UpdateOverall(double time);
+    void DrawParticle();
     glm::vec2 position_;
     glm::vec2 velocity_;
-
+    const int kRadius = 1;
 
    private:
-    const int kRadius = 1;
     const int kHeightAndWidth = 20;
     const double kLowerVelocityBound = 0.0;
     const int kVelocityRange= 2;
