@@ -25,7 +25,7 @@ class IdealGasApp : public ci::app::App {
    * Initializes the gas_container with a certain number of particles.
    */
  private:
-  GasContainer container_ = GasContainer(100);
+  GasContainer container_ = GasContainer(50);
 };
 
 }  // namespace idealgas

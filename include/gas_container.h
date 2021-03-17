@@ -35,6 +35,7 @@ class GasContainer {
    */
   void CheckForCollisions();
 
+  void TryUpdate(size_t i);
 
  private:
   /**

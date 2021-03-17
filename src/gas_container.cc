@@ -9,7 +9,7 @@ using glm::vec2;
 GasContainer::GasContainer(int num_particles) {
   for (size_t i = 0; i < num_particles; i++) {
     Particle particle;
-    std::cout << particle.velocity_;
+    //std::cout << particle.velocity_;
     particles_.push_back(particle);
   }
 }
@@ -23,8 +23,11 @@ void GasContainer::Display() const {
 }
 
 void GasContainer::AdvanceOneFrame() {
-  for (Particle& particle: particles_) {
-    particle.UpdateOverall(1.0);
+  for (size_t i = 0; i < particles_.size(); i++) {
+    //Particle &particle = particles_[i];
+    TryUpdate(i);
+    std::cout << particles_[1].position_;
+    //std::cout <<particles_[1].velocity_;
   }
   CheckForCollisions();
 
@@ -59,4 +62,32 @@ void GasContainer::CommenceCollision(size_t present_index, size_t check_index, d
   particles_[present_index].velocity_ = new_velocity_1;
   particles_[check_index].velocity_ = new_velocity_2;
 }
+
+void GasContainer::TryUpdate(size_t i) {
+  if (particles_[i].position_.x + particles_[i].kRadius > particles_[i].kHeightAndWidth) {
+    if (particles_[i].velocity_.x > 0) {
+      particles_[i].velocity_ = glm::vec2(-1, 1) * particles_[i].velocity_;
+      particles_[i].position_ += particles_[i].velocity_;
+    }
+  } else if (particles_[i].position_.x < particles_[i].kRadius) {
+    if (particles_[i].velocity_.x < 0) {
+      particles_[i].velocity_ = glm::vec2(-1, 1) * particles_[i].velocity_;
+      particles_[i].position_ += particles_[i].velocity_;
+    }
+  } else if (particles_[i].position_.y + particles_[i].kRadius > particles_[i].kHeightAndWidth) {
+    if (particles_[i].velocity_.y > 0) {
+      particles_[i].velocity_ = glm::vec2(1, -1) * particles_[i].velocity_;
+      particles_[i].position_ += particles_[i].velocity_;
+    }
+  } else if (particles_[i].position_.y < particles_[i].kRadius) {
+    if (particles_[i].velocity_.y < 0) {
+      particles_[i].velocity_ = glm::vec2(1, -1) * particles_[i].velocity_;
+      particles_[i].position_ += particles_[i].velocity_;
+    }
+  } else {
+    particles_[i].position_ +=  particles_[i].velocity_;
+  }
+
+}
+
 }  // namespace idealgas

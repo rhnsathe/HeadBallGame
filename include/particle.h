@@ -20,11 +20,11 @@ namespace idealgas {
     glm::vec2 position_ = glm::vec2(0,0);
     glm::vec2 velocity_ = glm::vec2(0,0);
     const int kRadius = 10;
+    const int kHeightAndWidth = 700;
 
    private:
-    const int kHeightAndWidth = 700;
     const double kLowerVelocityBound = 2.0;
-    const int kVelocityRange= 8;
+    const int kVelocityRange= 10;
     // This variable MUST be equal to kRadius.
     const int kLowerPositionBound = kRadius;
     void UpdateOneSecond();
