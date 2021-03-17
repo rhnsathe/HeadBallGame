@@ -9,6 +9,7 @@ using glm::vec2;
 GasContainer::GasContainer(int num_particles) {
   for (size_t i = 0; i < num_particles; i++) {
     Particle particle;
+    std::cout << particle.velocity_;
     particles_.push_back(particle);
   }
 }
@@ -17,8 +18,8 @@ void GasContainer::Display() const {
   for (Particle particle: particles_) {
     particle.DrawParticle();
   }
-  ci::gl::color(ci::Color("white"));
-  ci::gl::drawStrokedRect(ci::Rectf(vec2(0, 0), vec2(400, 400)));
+  ci::gl::color(ci::Color("black"));
+  ci::gl::drawStrokedRect(ci::Rectf(vec2(0, 0), vec2(700, 700)));
 }
 
 void GasContainer::AdvanceOneFrame() {

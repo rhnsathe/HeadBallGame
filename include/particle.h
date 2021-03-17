@@ -12,16 +12,17 @@ namespace idealgas {
   class Particle {
    public:
     Particle();
+    Particle(glm::vec2 position, glm::vec2 velocity);
     //glm::vec2 getPosition();
     //glm::vec2 getVelocity();
     void UpdateOverall(double time);
     void DrawParticle();
     glm::vec2 position_ = glm::vec2(0,0);
     glm::vec2 velocity_ = glm::vec2(0,0);
-    const int kRadius = 1;
+    const int kRadius = 10;
 
    private:
-    const int kHeightAndWidth = 20;
+    const int kHeightAndWidth = 700;
     const double kLowerVelocityBound = 2.0;
     const int kVelocityRange= 8;
     // This variable MUST be equal to kRadius.

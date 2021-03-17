@@ -19,6 +19,11 @@ Particle::Particle() {
   velocity_ = glm::vec2(random_x_velocity, random_y_velocity);
 }
 
+Particle::Particle(glm::vec2 position, glm::vec2 velocity) {
+  position_ = position;
+  velocity_ = velocity;
+}
+
 /*glm::vec2 Particle::getPosition() {
   return position_;
 }*/
@@ -48,14 +53,33 @@ void Particle::CollideWithWalls(double time, double new_x_position, double new_y
   double x_time_to_collide = 0.0;
   double y_time_to_collide = 0.0;
   if (CheckVerticalWalls()) {
-    x_time_to_collide = abs((position_.x - kRadius)/velocity_.x);
-  } else if (!CheckVerticalWalls()) {
-    x_time_to_collide = abs((position_.x - (kRadius + kHeightAndWidth)/velocity_.x));
+    if (velocity_.x < 0) {
+      x_time_to_collide = abs((position_.x - kRadius)/velocity_.x);
+    } else {
+      return;
+    }
+  }
+  if (!CheckVerticalWalls()) {
+    if (velocity_.x > 0) {
+      x_time_to_collide = abs((position_.x - (kHeightAndWidth - kRadius)/velocity_.x));
+    } else {
+      return;
+    }
   }
   if (CheckHorizontalWalls()) {
-    y_time_to_collide = abs((position_.y - kRadius)/velocity_.y);
-  } else if (!CheckHorizontalWalls()) {
-    y_time_to_collide = abs((position_.y - kRadius)/velocity_.y);
+    if (velocity_.y < 0) {
+      y_time_to_collide = abs((position_.y - kRadius)/velocity_.y);
+    } else {
+      return;
+    }
+  }
+  if (!CheckHorizontalWalls()) {
+    if (velocity_.y > 0) {
+      y_time_to_collide = abs((position_.y - (kHeightAndWidth - kRadius))/velocity_.y);
+    } else {
+      return;
+    }
+
   }
   if (x_time_to_collide == y_time_to_collide) {
     CollideWithBothWalls(time, x_time_to_collide, new_x_position, new_y_position);
@@ -88,7 +112,7 @@ void Particle::CollideWithVerticalWalls(double time, double x_time_to_collide, d
 
 bool Particle::CheckExistenceOfCollision(double new_x_position, double new_y_position) {
   if (new_x_position <= kRadius || new_y_position <= kRadius ||
-      new_x_position >= kRadius + kHeightAndWidth || new_y_position >= kRadius + kHeightAndWidth) {
+      new_x_position >= kHeightAndWidth - kRadius || new_y_position >= kHeightAndWidth - kRadius) {
     return true;
   }
   return false;
@@ -96,7 +120,7 @@ bool Particle::CheckExistenceOfCollision(double new_x_position, double new_y_pos
 
 bool Particle::CheckVerticalWalls() {
   double x_time_to_collide_with_left = abs((position_.x - kRadius)/velocity_.x);
-  double x_time_to_collide_with_right = abs((position_.x - (kRadius + kHeightAndWidth)/velocity_.x));
+  double x_time_to_collide_with_right = abs((position_.x - (kHeightAndWidth - kRadius)/velocity_.x));
   if (x_time_to_collide_with_left < x_time_to_collide_with_right) {
     return true;
   } else {
@@ -106,7 +130,7 @@ bool Particle::CheckVerticalWalls() {
 
 bool Particle::CheckHorizontalWalls() {
   double y_time_to_collide_with_top = abs((position_.y - kRadius)/velocity_.y);
-  double y_time_to_collide_with_bottom = abs((position_.y - kRadius)/velocity_.y);
+  double y_time_to_collide_with_bottom = abs((position_.y - (kHeightAndWidth - kRadius))/velocity_.y);
   if (y_time_to_collide_with_top < y_time_to_collide_with_bottom) {
     return true;
   } else {
