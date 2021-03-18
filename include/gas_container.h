@@ -61,6 +61,11 @@ class GasContainer {
   std::vector<Particle> particles_;
 
   /**
+   * Window length and width.
+   */
+  int kLengthAndWidth = 700;
+
+  /**
    * Initiates collision between particles.
    * @param present_index
    * @param check_index

@@ -3,7 +3,6 @@
 //
 #pragma once
 #include "cinder/gl/gl.h"
-//#include "gas_container.h"
 #include "particle.h"
 
 using glm::vec2;

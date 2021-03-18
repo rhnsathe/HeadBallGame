@@ -1,6 +1,5 @@
 #include <catch2/catch.hpp>
 
-#include <gas_container.h>
 #include <particle.h>
 
 using idealgas::Particle;
