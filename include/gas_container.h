@@ -35,7 +35,24 @@ class GasContainer {
    */
   void CheckForCollisions();
 
+  /**
+   * Attempts an update of particle positions if they bounce off a wall,
+   * but simply default to changing their position if they don't.
+   * @param i
+   */
   void TryUpdate(size_t i);
+
+  /**
+   * Adds a particle to the particles vector manually.
+   * @param particle
+   */
+  void AddParticle(Particle particle);
+
+  /**
+   * Returns the particles vector.
+   * @return
+   */
+  std::vector<Particle> GetParticles();
 
  private:
   /**

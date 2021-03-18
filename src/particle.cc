@@ -24,16 +24,12 @@ Particle::Particle(glm::vec2 position, glm::vec2 velocity) {
   velocity_ = velocity;
 }
 
-/*glm::vec2 Particle::getPosition() {
-  return position_;
-}*/
+double Particle::GetKLowerVelocityBound() {
+  return kLowerVelocityBound;
+}
 
-/*glm::vec2 Particle::getVelocity() {
-  return velocity_;
-}*/
-
-void Particle::UpdateOneSecond() {
-  UpdateOverall(1.0);
+double Particle::GetKVelocityRange() {
+  return kVelocityRange;
 }
 
 void Particle::UpdateOverall(double time) {
@@ -139,7 +135,7 @@ bool Particle::CheckHorizontalWalls() {
 }
 
 void Particle::DrawParticle() {
-  ci::gl::color(ci::Color("orange"));
+  ci::gl::color(ci::Color("blue"));
   ci::gl::drawSolidCircle(position_, kRadius);
 }
 

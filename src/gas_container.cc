@@ -9,7 +9,6 @@ using glm::vec2;
 GasContainer::GasContainer(int num_particles) {
   for (size_t i = 0; i < num_particles; i++) {
     Particle particle;
-    //std::cout << particle.velocity_;
     particles_.push_back(particle);
   }
 }
@@ -19,18 +18,14 @@ void GasContainer::Display() const {
     particle.DrawParticle();
   }
   ci::gl::color(ci::Color("black"));
-  ci::gl::drawStrokedRect(ci::Rectf(vec2(0, 0), vec2(700, 700)));
+  ci::gl::drawStrokedRect(ci::Rectf(vec2(0, 0), vec2(particles_[0].kHeightAndWidth, particles_[0].kHeightAndWidth)));
 }
 
 void GasContainer::AdvanceOneFrame() {
   for (size_t i = 0; i < particles_.size(); i++) {
-    //Particle &particle = particles_[i];
     TryUpdate(i);
-    std::cout << particles_[1].position_;
-    //std::cout <<particles_[1].velocity_;
   }
   CheckForCollisions();
-
 }
 
 void GasContainer::CheckForCollisions() {
@@ -40,7 +35,10 @@ void GasContainer::CheckForCollisions() {
         Particle& particle1 = particles_[present_index];
         Particle& particle2 = particles_[check_index];
         double distanceBetweenRadii = glm::distance(particle1.position_, particle2.position_);
+        // Ensures that the distance between the radii is less than the 2 * kRadius.
         if (distanceBetweenRadii < particle1.kRadius + particle2.kRadius) {
+          // Checks to make sure the dot product of the sum of the velocity vectors
+          // and the sum of the position vectors is less than 0.
           if (glm::dot((particle1.velocity_ - particle2.velocity_), (particle1.position_ - particle2.position_)) < 0) {
             CommenceCollision(present_index, check_index, distanceBetweenRadii);
           }
@@ -87,7 +85,14 @@ void GasContainer::TryUpdate(size_t i) {
   } else {
     particles_[i].position_ +=  particles_[i].velocity_;
   }
+}
 
+std::vector<Particle> GasContainer::GetParticles() {
+  return particles_;
+}
+
+void GasContainer::AddParticle(Particle particle) {
+  particles_.push_back(particle);
 }
 
 }  // namespace idealgas
