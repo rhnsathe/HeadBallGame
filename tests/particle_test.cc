@@ -7,10 +7,10 @@ using idealgas::Particle;
 TEST_CASE("Position and velocity test") {
   Particle particle;
   SECTION("Position fits x upper bound") {
-    REQUIRE(particle.position_.x < (particle.kHeightAndWidth - particle.kRadius));
+    REQUIRE(particle.position_.x < (particle.kWidth - particle.radius_));
   }
   SECTION("Position fits x lower bound") {
-    REQUIRE(particle.position_.x > particle.kRadius);
+    REQUIRE(particle.position_.x > particle.radius_);
   }
   SECTION("Velocity fits x lower bound") {
     REQUIRE(particle.velocity_.x >= particle.GetKLowerVelocityBound());
@@ -19,10 +19,10 @@ TEST_CASE("Position and velocity test") {
     REQUIRE(particle.velocity_.x < particle.GetKLowerVelocityBound() + particle.GetKVelocityRange());
   }
   SECTION("Position fits y upper bound") {
-    REQUIRE(particle.position_.y < (particle.kHeightAndWidth - particle.kRadius));
+    REQUIRE(particle.position_.y < (particle.kHeight - particle.radius_));
   }
   SECTION("Position fits y lower bound") {
-    REQUIRE(particle.position_.y > particle.kRadius);
+    REQUIRE(particle.position_.y > particle.radius_);
   }
   SECTION("Velocity fits y lower bound") {
     REQUIRE(particle.velocity_.y >= particle.GetKLowerVelocityBound());

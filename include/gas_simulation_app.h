@@ -18,14 +18,21 @@ class IdealGasApp : public ci::app::App {
   void update() override;
 
   // provided that you can see the entire UI on your screen.
-  const int kWindowSize = 700;
+  const int kWindowSize = 1200;
   const int kMargin = 100;
 
   /**
    * Initializes the gas_container with a certain number of particles.
    */
  private:
-  const int kNumParticles = 50;
+  /**
+   * Number of particles in the container.
+   */
+  const size_t kNumParticles = 150;
+
+  /**
+   * Constructor to initialize a gas container with a certain number of particles.
+   */
   GasContainer container_ = GasContainer(kNumParticles);
 };
 

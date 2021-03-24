@@ -32,12 +32,12 @@ TEST_CASE("Helper Method tests") {
     glm::vec2 velocity = particle.velocity_;
     position += velocity;
     container_.AddParticle(particle);
-    container_.TryUpdate(0);
+    container_.AdvanceOneFrame();
     REQUIRE(container_.GetParticles().at(0).position_.x == position.x);
   }
   SECTION("Validate TryUpdate, Right side vertical wall") {
     GasContainer container_ = GasContainer(0);
-    Particle particle = Particle(glm::vec2(700, 250), glm::vec2(20, -25));
+    Particle particle = Particle(glm::vec2(800, 250), glm::vec2(20, -25));
     container_.AddParticle(particle);
     container_.TryUpdate(0);
     REQUIRE(container_.GetParticles().at(0).velocity_.x == -20);

@@ -23,6 +23,18 @@ namespace idealgas {
     Particle(glm::vec2 position, glm::vec2 velocity);
 
     /**
+     * Initializes a particle with a specific color.
+     * @param color_
+     */
+    Particle(ci::Color &color_);
+
+    /**
+     * Initializes a particle with a specific color.
+     * @param color_
+     */
+    Particle(ci::Color color_, size_t radius, size_t mass);
+
+    /**
      * Returns the kLowerVelocityBound value.
      * @return double.
      */
@@ -43,7 +55,13 @@ namespace idealgas {
     /**
      * Draws particle using Cinder.
      */
-    void DrawParticle();
+    void DrawParticle(ci::Color &color);
+
+    /**
+     * Initializes a specific mass and radius of a colored particle.
+     * @param color
+     */
+    void InitializeParticleMassAndRadiusWithColor(ci::Color color);
 
     /**
      * Vec2 with x and y positions of particle.
@@ -58,28 +76,70 @@ namespace idealgas {
     /**
      * Radius of particles.
      */
-    const int kRadius = 8;
+    int radius_;
 
     /**
-     * Height and Width of the box.
+     * Height of the box.
      */
-    const int kHeightAndWidth = 700;
+    const int kHeight = 700;
+
+    /**
+     * Width of the box.
+     */
+    const int kWidth = 800;
+
+    /**
+     * Represents the color of the particle.
+     */
+    ci::Color color_;
+
+    /**
+     * Represents the mass of the particle.
+     */
+    size_t mass_;
+
 
    private:
     /**
      * Double that holds the lowest possible value for the velocity.
      */
-    const int kLowerVelocityBound = -10.0;
+    const double kLowerVelocityBound = 0.0;
 
     /**
      * Double that holds the range of possible velocity values.
      */
-    const int kVelocityRange = 15;
+    const int kVelocityRange = 5;
 
     /**
-     * Double that mandates the lower bound for position (must always equal the radius).
+     * Radius of blue particle, also serves as default radius of any other particle.
      */
-    const int kLowerPositionBound = kRadius;
+    const size_t kBlueRadius = 8;
+
+    /**
+     * Mass of blue particle, also serves as default mass of any other particle.
+     */
+    const size_t kBlueMass = 5;
+
+    /**
+     * Radius of green particle.
+     */
+    const size_t kGreenRadius = 10;
+
+    /**
+     * Mass of green particle.
+     */
+    const size_t kGreenMass = 25;
+
+    /**
+     * Radius of orange particle.
+     */
+    const size_t kOrangeRadius = 12;
+
+    /**
+     * Mass of orange particle.
+     */
+    const size_t kOrangeMass = 45;
+
 
     /**
      * Called if there is a particle collision with the walls.

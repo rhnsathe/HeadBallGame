@@ -17,7 +17,7 @@ class GasContainer {
    * Constructor that takes in whatever number
    * of particles is necessary for the simulation.
    */
-  GasContainer(int num_particles);
+  GasContainer(size_t num_particles);
 
   /**
    * Displays the container walls and the current positions of the particles.
@@ -40,13 +40,13 @@ class GasContainer {
    * but simply default to changing their position if they don't.
    * @param i
    */
-  void TryUpdate(size_t i);
+  size_t TryUpdate(size_t i);
 
   /**
    * Adds a particle to the particles vector manually.
    * @param particle
    */
-  void AddParticle(Particle particle);
+  void AddParticle(Particle &particle);
 
   /**
    * Returns the particles vector.
@@ -56,22 +56,27 @@ class GasContainer {
 
  private:
   /**
-   * Fills with particles with random positions and velocities.
-   */
-  std::vector<Particle> particles_;
-
-  /**
-   * Window length and width.
-   */
-  int kLengthAndWidth = 700;
-
-  /**
    * Initiates collision between particles.
    * @param present_index
    * @param check_index
    * @param distanceBetweenRadii
    */
   void CommenceCollision(size_t present_index, size_t check_index, double distanceBetweenRadii);
+
+  /**
+   * Fills with particles with random positions and velocities.
+   */
+  std::vector<Particle> particles_;
+
+  /**
+   * Window height.
+   */
+  int kHeight = 700;
+
+  /**
+   * Window width.
+   */
+  int kWidth = 800;
 };
 
 }  // namespace idealgas
