@@ -35,9 +35,6 @@ Histogram::Histogram(std::vector<Particle> particles, size_t num_particles) {
       num_orange_.push_back(particles[x]);
     }
   }
-  //DrawHistogram("blue");
-  //DrawHistogram("green");
-  //DrawHistogram("orange");
 }
 
 void Histogram::DrawHistogram(ci::Color color) {

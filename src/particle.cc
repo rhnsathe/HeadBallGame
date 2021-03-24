@@ -226,15 +226,19 @@ void Particle::DrawParticle(ci::Color &color) {
 }
 
 void Particle::InitializeParticleMassAndRadiusWithColor(ci::Color color) {
+  // Sets radius and mass of blue particle
   if (color == ci::Color("blue")) {
     radius_ = kBlueRadius;
     mass_ = kBlueMass;
+    // Sets radius and mass of green particle
   } else if (color == ci::Color("green")) {
     radius_ = kGreenRadius;
     mass_ = kGreenMass;
+    // Sets radius and mass of orange particle
   } else if (color == ci::Color("orange")) {
     radius_ = kOrangeRadius;
     mass_ = kOrangeMass;
+    // Defaults to blue particle if no colors match.
   } else {
     radius_ = kBlueRadius;
     mass_ = kBlueMass;
