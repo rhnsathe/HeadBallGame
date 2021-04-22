@@ -32,15 +32,8 @@ GasContainer::GasContainer(size_t num_particles) {
 }
 
 void GasContainer::Display() const {
-  for (Particle particle: particles_) {
-    particle.DrawParticle(particle.color_);
-  }
   ci::gl::color(ci::Color("white"));
   ci::gl::drawStrokedRect(ci::Rectf(vec2(2, 2), vec2(kWidth, kHeight)));
-  Histogram histogram = Histogram(particles_, particles_.size());
-  histogram.DrawHistogram("blue");
-  histogram.DrawHistogram("green");
-  histogram.DrawHistogram("orange");
 }
 
 void GasContainer::AdvanceOneFrame() {
