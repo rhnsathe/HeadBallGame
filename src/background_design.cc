@@ -20,6 +20,7 @@ void BackgroundDesign::Display() {
   DrawRightSideGoalposts();
   DrawRightSideSideNet();
   DrawRightSideTopNet();
+  DrawScoreBoard();
 }
 
 void BackgroundDesign::DrawLeftSideGoalposts() {
@@ -273,5 +274,37 @@ void BackgroundDesign::DrawRightSideTopNet() {
                      vec2(kXWindowSize - initial_x_value + x_interval * y,
                           initial_y_value + y_interval * y));
   }
+}
+
+void BackgroundDesign::DrawScoreBoard() {
+  // Sets x center position
+  size_t x_center_position = kXWindowSize/2;
+
+  // Sets initial and final x or y position
+  size_t initial_x_or_y_position = 805;
+  size_t final_x_or_y_position = 895;
+
+  // Sets both intervals
+  size_t x_interval = 200;
+  size_t y_interval = 5;
+
+  // Draws scoreboard label
+  std::string scoreboard_label = "SCOREBOARD";
+  ci::gl::drawStringCentered(scoreboard_label, vec2(x_center_position,initial_x_or_y_position - y_interval * 2), "white", ci::Font());
+
+  // Draws scoreboard
+  ci::gl::color(ci::Color("black"));
+  ci::gl::drawSolidRect(ci::Rectf(vec2(x_center_position - x_interval,initial_x_or_y_position),
+                                  vec2(x_center_position + x_interval,final_x_or_y_position)));
+  ci::gl::color(ci::Color("orange"));
+  ci::gl::drawSolidRect(ci::Rectf(vec2(x_center_position - x_interval + y_interval,
+                                       initial_x_or_y_position + y_interval),
+                                  vec2(final_x_or_y_position,
+                                       final_x_or_y_position - y_interval)));
+  ci::gl::color(ci::Color("purple"));
+  ci::gl::drawSolidRect(ci::Rectf(vec2(final_x_or_y_position + y_interval * 2,
+                                       initial_x_or_y_position + y_interval),
+                                  vec2(final_x_or_y_position + x_interval,
+                                       final_x_or_y_position - y_interval)));
 }
 }

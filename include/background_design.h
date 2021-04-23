@@ -52,6 +52,12 @@ namespace finalproject {
     * Draws the right side top nets.
     */
    void DrawRightSideTopNet();
+
+   /**
+    * Draws scoreboard.
+    */
+   void DrawScoreBoard();
+
   private:
    /**
     * X length of Window.
