@@ -8,15 +8,69 @@
 namespace finalproject {
  class BackgroundDesign {
   public:
+   /**
+    * Default constructor for BackgroundDesign.
+    */
    BackgroundDesign();
+
+   /**
+    * Displays the field.
+    */
    void Display();
+
+   /**
+    * Draws the left side goal posts.
+    */
    void DrawLeftSideGoalposts();
+
+   /**
+    * Draws the left side side nets.
+    */
    void DrawLeftSideSideNet();
+
+   /**
+    * Draws the left side top nets.
+    */
    void DrawLeftSideTopNet();
+
+   /**
+    * Draws the soccer field.
+    */
+   void DrawField();
+
+   /**
+    * Draws the right side goal posts.
+    */
+   void DrawRightSideGoalposts();
+
+   /**
+    * Draws the right side side nets.
+    */
+   void DrawRightSideSideNet();
+
+   /**
+    * Draws the right side top nets.
+    */
+   void DrawRightSideTopNet();
   private:
-   //size_t kXWindowSize = 1800;
+   /**
+    * X length of Window.
+    */
+   size_t kXWindowSize = 1800;
+
+   /**
+    * Goalpost width.
+    */
    size_t rect_width = 10;
+
+   /**
+    * Initial position.
+    */
    size_t initial_position = 100;
+
+   /**
+    * Interval between two goalposts.
+    */
    size_t interval = 150;
 
 };
