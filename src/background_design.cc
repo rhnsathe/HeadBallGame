@@ -13,6 +13,7 @@ using glm::vec2;
 BackgroundDesign::BackgroundDesign() {}
 
 void BackgroundDesign::Display() {
+  DrawScoreBoard();
   DrawLeftSideGoalposts();
   DrawLeftSideSideNet();
   DrawLeftSideTopNet();
@@ -20,7 +21,6 @@ void BackgroundDesign::Display() {
   DrawRightSideGoalposts();
   DrawRightSideSideNet();
   DrawRightSideTopNet();
-  DrawScoreBoard();
 }
 
 void BackgroundDesign::DrawLeftSideGoalposts() {
