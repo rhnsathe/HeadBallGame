@@ -13,7 +13,6 @@ using glm::vec2;
 BackgroundDesign::BackgroundDesign() {}
 
 void BackgroundDesign::Display() {
-  DrawScoreBoard();
   DrawLeftSideGoalposts();
   DrawLeftSideSideNet();
   DrawLeftSideTopNet();
@@ -276,7 +275,7 @@ void BackgroundDesign::DrawRightSideTopNet() {
   }
 }
 
-void BackgroundDesign::DrawScoreBoard() {
+void BackgroundDesign::DrawScoreBoard(size_t player_one_score, size_t player_two_score) {
   // Sets x center position
   size_t x_center_position = kXWindowSize/2;
 
@@ -306,5 +305,8 @@ void BackgroundDesign::DrawScoreBoard() {
                                        initial_x_or_y_position + y_interval),
                                   vec2(final_x_or_y_position + x_interval,
                                        final_x_or_y_position - y_interval)));
+
+  ci::gl::drawStringCentered(std::to_string(player_one_score), vec2(x_center_position - 100,initial_x_or_y_position + y_interval * 3), "white", ci::Font());
+  ci::gl::drawStringCentered(std::to_string(player_two_score), vec2(x_center_position + 100,initial_x_or_y_position + y_interval * 3), "white", ci::Font());
 }
 }

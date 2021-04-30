@@ -53,7 +53,8 @@ list(APPEND SOURCE_FILES    src/gas_container.cc
                             src/final_project_app.cc
                             src/particle.cc
                             src/histogram.cc
-                            src/background_design.cc)
+                            src/background_design.cc
+        src/player.cc)
 
 list(APPEND TEST_FILES tests/particle_test.cc
                        tests/gas_container_test.cc

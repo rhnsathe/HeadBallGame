@@ -56,7 +56,7 @@ namespace finalproject {
    /**
     * Draws scoreboard.
     */
-   void DrawScoreBoard();
+   void DrawScoreBoard(size_t player_one_score, size_t player_two_score);
 
   private:
    /**
