@@ -44,7 +44,9 @@ void BackgroundDesign::DrawLeftSideGoalposts() {
   double turn_value = atan(numerator/denominator);
   ci::gl::rotate(M_PI - turn_value);
   double hypotenuse = sqrt(numerator*numerator + denominator*denominator);
-  ci::gl::drawSolidRect(ci::Rectf(vec2(0,0), vec2(hypotenuse,rect_width)));
+  ci::Rectf left_rotated_rectangle = ci::Rectf (vec2(0,0), vec2(hypotenuse, rect_width));
+  left_rotated_rectangle_ = ci::Rectf (vec2(0,0), vec2(hypotenuse, rect_width));
+  ci::gl::drawSolidRect(left_rotated_rectangle);
   ci::gl::popModelMatrix();
 
   // Draws the vertical goal posts
@@ -198,6 +200,7 @@ void BackgroundDesign::DrawRightSideGoalposts() {
   double turn_value_2 = atan(numerator/denominator);
   ci::gl::rotate((1/2)*M_PI + turn_value_2);
   double hypotenuse = sqrt(numerator*numerator + denominator*denominator);
+  right_rotated_rectangle_ = ci::Rectf(ci::Rectf(vec2(0,0), vec2(hypotenuse,rect_width)));
   ci::gl::drawSolidRect(ci::Rectf(vec2(0,0), vec2(hypotenuse,rect_width)));
   ci::gl::popModelMatrix();
 
@@ -306,7 +309,12 @@ void BackgroundDesign::DrawScoreBoard(size_t player_one_score, size_t player_two
                                   vec2(final_x_or_y_position + x_interval,
                                        final_x_or_y_position - y_interval)));
 
-  ci::gl::drawStringCentered(std::to_string(player_one_score), vec2(x_center_position - 100,initial_x_or_y_position + y_interval * 3), "white", ci::Font());
-  ci::gl::drawStringCentered(std::to_string(player_two_score), vec2(x_center_position + 100,initial_x_or_y_position + y_interval * 3), "white", ci::Font());
+  const ci::Font kLabelOneFont = ci::Font("Helvetica", 40);
+  ci::gl::drawStringCentered(std::to_string(player_one_score), vec2(x_center_position - 100,initial_x_or_y_position + y_interval * 3 + 25), "white", kLabelOneFont);
+  ci::gl::drawStringCentered(std::to_string(player_two_score), vec2(x_center_position + 100,initial_x_or_y_position + y_interval * 3 + 25), "white", kLabelOneFont);
+}
+
+size_t BackgroundDesign::getKXWindowSize() {
+  return kXWindowSize;
 }
 }

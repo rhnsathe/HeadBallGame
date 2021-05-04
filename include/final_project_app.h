@@ -21,6 +21,8 @@ class FinalProjectApp : public ci::app::App {
   void keyDown(ci::app::KeyEvent event) override;
   void checkIfPlayerUp();
   bool checkIfGoalScored();
+  void displayGoalAnimation();
+  void displayTimer();
 
   // provided that you can see the entire UI on your screen.
   const int kXWindowSize = 1800;
@@ -31,11 +33,15 @@ class FinalProjectApp : public ci::app::App {
    * Initializes the gas_container with a certain number of particles.
    */
  private:
-
   /**
    * Constructor to initialize a gas container with a certain number of particles.
    */
    BackgroundDesign backgroundDesign_ = BackgroundDesign();
+   size_t temp_disablement_ = 0;
+   size_t goal_animation_ = 0;
+   size_t x = 0;
+   bool game_over_ = false;
+   double clock_time_ = 90;
    bool player_one_move_up_ = false;
    bool player_two_move_up_ = false;
    size_t player_one_score_ = 0;

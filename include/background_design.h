@@ -58,6 +58,15 @@ namespace finalproject {
     */
    void DrawScoreBoard(size_t player_one_score, size_t player_two_score);
 
+   /**
+    * Gets the window size.
+    * @return window size.
+    */
+   size_t getKXWindowSize();
+
+   ci::Rectf left_rotated_rectangle_;
+
+   ci::Rectf right_rotated_rectangle_;
   private:
    /**
     * X length of Window.

@@ -24,7 +24,7 @@ class Player {
   void applyGravityToBall();
   void initiateSpecialLeftKick(Player& ball);
   void initiateSpecialRightKick(Player& ball);
-  void checkForCollisionWithBall(Player& player_one, Player& ball);
+  bool checkForCollisionWithBall(Player& player_one, Player& ball, size_t temp_disablement);
   void checkForCollisionWithWall(Player& ball);
   double getKPlayerTopRadius();
   double getKPlayerBottomRadius();
@@ -40,7 +40,9 @@ class Player {
   glm::vec2 player_r_eye_position_;
   glm::vec2 player_l_smile_position_;
   glm::vec2 player_r_smile_position_;
+  int player_x_increment = 12;
   double kPlayerTopRadius = 25;
   double kPlayerBottomRadius = 50;
+  BackgroundDesign background_design_ = BackgroundDesign();
 };
 }

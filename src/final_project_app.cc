@@ -12,42 +12,93 @@ FinalProjectApp::FinalProjectApp() {
 void FinalProjectApp::draw() {
   ci::Color background_color("dodgerblue");
   ci::gl::clear(background_color);
-  if (checkIfGoalScored()) {
-    player_one_ = finalproject::Player('p');
-    player_two_ = finalproject::Player('o');
-    ball_ = finalproject::Player(0);
+  if (x > 0 && x < 1001 && game_over_ == true) {
+    const ci::Font kLabelOneFont = ci::Font("Helvetica", 75);
+    std::string winner = "";
+    if (player_one_score_ > player_two_score_) {
+      winner = "Orange wins!";
+    } else if (player_one_score_ < player_two_score_) {
+      winner = "Purple wins!";
+    } else {
+      winner = "It's a tie!";
+    }
+    x++;
+    if (x == 1000) {
+      player_one_ = finalproject::Player('p');
+      player_two_ = finalproject::Player('o');
+      ball_ = finalproject::Player(0);
+      game_over_ = false;
+      x = 0;
+      clock_time_ = 90;
+      player_one_score_ = 0;
+      player_two_score_ = 0;
+    } else {
+      std::string end_game_text = "GAME OVER!";
+      ci::gl::drawStringCentered(end_game_text, vec2(900,100), "white", kLabelOneFont);
+      ci::gl::drawStringCentered(winner, vec2(900,200), "white", kLabelOneFont);
+    }
   }
-  if (player_one_.player_top_velocity_.x < 0) {
-    player_one_.player_top_velocity_.x += 2;
-    player_one_.player_bottom_velocity_.x += 2;
+  if (x == 0) {
+    displayTimer();
+    if (goal_animation_ == 50) {
+      goal_animation_ = 0;
+    }
+    if (checkIfGoalScored()) {
+      goal_animation_++;
+      player_one_ = finalproject::Player('p');
+      player_two_ = finalproject::Player('o');
+      ball_ = finalproject::Player(0);
+    }
+    if (player_one_.player_top_velocity_.x < 0) {
+      player_one_.player_top_velocity_.x += 4;
+      player_one_.player_bottom_velocity_.x += 4;
+    }
+    if (player_one_.player_top_velocity_.x > 0) {
+      player_one_.player_top_velocity_.x += -4;
+      player_one_.player_bottom_velocity_.x += -4;
+    }
+    if (player_two_.player_top_velocity_.x < 0) {
+      player_two_.player_top_velocity_.x += 4;
+      player_two_.player_bottom_velocity_.x += 4;
+    }
+    if (player_two_.player_top_velocity_.x > 0) {
+      player_two_.player_top_velocity_.x += -4;
+      player_two_.player_bottom_velocity_.x += -4;
+    }
+    if (goal_animation_ != 0 && goal_animation_ != 50) {
+      displayGoalAnimation();
+      goal_animation_++;
+    }
+    if (ball_.checkForCollisionWithBall(player_one_, ball_, temp_disablement_)) {
+      temp_disablement_ = 5;
+    }
+    if (ball_.checkForCollisionWithBall(player_two_, ball_, temp_disablement_)) {
+      temp_disablement_ = 5;
+    }
+    //ball_.checkForCollisionWithBall(player_one_, ball_);
+    //ball_.checkForCollisionWithBall(player_two_, ball_);
+    ball_.checkForCollisionWithWall(ball_);
+    //player_two_.checkForCollisionWithWall(ball_);
+    backgroundDesign_.Display();
+    backgroundDesign_.DrawScoreBoard(player_one_score_, player_two_score_);
+    checkIfPlayerUp();
+    //ball_.applyGravityToBall();
+    ball_.drawBall();
+    player_one_.drawPlayer();
+    player_two_.drawPlayer();
+    if (temp_disablement_ != 0) {
+      temp_disablement_--;
+    }
   }
-  if (player_one_.player_top_velocity_.x > 0) {
-    player_one_.player_top_velocity_.x += -2;
-    player_one_.player_bottom_velocity_.x += -2;
-  }
-  if (player_two_.player_top_velocity_.x < 0) {
-    player_two_.player_top_velocity_.x += 2;
-    player_two_.player_bottom_velocity_.x += 2;
-  }
-  if (player_two_.player_top_velocity_.x > 0) {
-    player_two_.player_top_velocity_.x += -2;
-    player_two_.player_bottom_velocity_.x += -2;
-  }
-  ball_.checkForCollisionWithBall(player_one_, ball_);
-  ball_.checkForCollisionWithBall(player_two_, ball_);
-  ball_.checkForCollisionWithWall(ball_);
-  //player_two_.checkForCollisionWithWall(ball_);
-  backgroundDesign_.Display();
-  backgroundDesign_.DrawScoreBoard(player_one_score_, player_two_score_);
-  checkIfPlayerUp();
-  //ball_.applyGravityToBall();
-  ball_.drawBall();
-  player_one_.drawPlayer();
-  player_two_.drawPlayer();
 }
 
 void FinalProjectApp::update() {
-
+  if (clock_time_ > 0) {
+    clock_time_ = clock_time_ - .05;
+  } else {
+    game_over_ = true;
+    x++;
+  }
 }
 
 void FinalProjectApp::keyDown(ci::app::KeyEvent event) {
@@ -87,13 +138,11 @@ void FinalProjectApp::keyDown(ci::app::KeyEvent event) {
       if (distanceBetweenRadii2 < player_two_.getKPlayerBottomRadius() + ball_.getKPlayerTopRadius() + 30) {
         ball_.initiateSpecialRightKick(ball_);
       }
+      break;
   }
 }
 
 void FinalProjectApp::checkIfPlayerUp() {
-  /*if (ball_.ball_velocity_.x < .15 || ball_.ball_velocity_.x > -.15) {
-    ball_.ball_velocity_.x = 0.0;
-  }*/
   if (ball_.ball_velocity_.x <= 0) {
     ball_.ball_velocity_.x += 0.10;
   } else if (ball_.ball_velocity_.x > 0) {
@@ -116,6 +165,17 @@ bool FinalProjectApp::checkIfGoalScored() {
     return true;
   }
   return false;
+}
+
+void FinalProjectApp::displayGoalAnimation() {
+  const ci::Font kLabelOneFont = ci::Font("Helvetica", 200);
+  std::string goal_text = "GOAL!";
+  ci::gl::drawStringCentered(goal_text, vec2(900,200), "white", kLabelOneFont);
+}
+
+void FinalProjectApp::displayTimer() {
+  const ci::Font kLabelOneFont = ci::Font("Helvetica", 40);
+  ci::gl::drawStringCentered(std::to_string(clock_time_), vec2(900,10), "white", kLabelOneFont);
 }
 
 }  // namespace idealgas
