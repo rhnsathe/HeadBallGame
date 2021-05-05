@@ -240,15 +240,15 @@ TEST_CASE("Test regulate player velocity") {
     player.player_top_velocity_ = glm::vec2(5,0);
     player.player_bottom_velocity_ = glm::vec2(5,0);
     player.RegulatePlayerVelocity(player);
-    REQUIRE(player.player_top_velocity_.x == 2);
-    REQUIRE(player.player_bottom_velocity_.x == 2);
+    REQUIRE(player.player_top_velocity_.x == 3.5);
+    REQUIRE(player.player_bottom_velocity_.x == 3.5);
   }
   SECTION("Test player x velocity < 0") {
     Player player = Player('p');
     player.player_top_velocity_ = glm::vec2(-5,0);
     player.player_bottom_velocity_ = glm::vec2(-5,0);
     player.RegulatePlayerVelocity(player);
-    REQUIRE(player.player_top_velocity_.x == -2);
-    REQUIRE(player.player_bottom_velocity_.x == -2);
+    REQUIRE(player.player_top_velocity_.x == -3.5);
+    REQUIRE(player.player_bottom_velocity_.x == -3.5);
   }
 }

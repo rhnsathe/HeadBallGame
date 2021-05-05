@@ -51,7 +51,8 @@ void BackgroundDesign::DrawLeftSideGoalposts() {
   // Draws the vertical goal posts
   ci::gl::drawSolidRect(ci::Rectf(vec2(initial_position + interval - rect_width,initial_position),
                                   vec2(initial_position + interval,initial_position * 5 + rect_width)));
-  ci::gl::drawSolidRect(ci::Rectf(vec2(interval - rect_width,initial_position * 3), vec2(interval,initial_position * 7 + rect_width)));
+  ci::gl::drawSolidRect(ci::Rectf(vec2(interval - rect_width,initial_position * 3),
+                                  vec2(interval,initial_position * 7 + rect_width)));
 }
 
 void BackgroundDesign::DrawLeftSideSideNet() {
@@ -116,7 +117,8 @@ void BackgroundDesign::DrawLeftSideTopNet() {
   // Draw top of net - diagonal
   for (size_t y = 0; y < num_v_and_h_intervals; y++) {
     ci::gl::drawLine(vec2(0,initial_y_position + y_width_interval * y),
-                     vec2(initial_right_x_position - x_width_interval * y, initial_y_position + y_width_interval * y));
+                     vec2(initial_right_x_position - x_width_interval * y,
+                          initial_y_position + y_width_interval * y));
   }
 }
 
@@ -227,7 +229,8 @@ void BackgroundDesign::DrawRightSideSideNet() {
 
   // Draw vertical lines
   for (size_t x = 0; x < num_total_intervals + 1; x++) {
-    ci::gl::drawLine(vec2(rsp + abridged_interval_value * x,y_value_1), vec2(rsp + abridged_interval_value * x,y_value_2));
+    ci::gl::drawLine(vec2(rsp + abridged_interval_value * x,y_value_1),
+                     vec2(rsp + abridged_interval_value * x,y_value_2));
   }
 
   // Sets difference between horizontal lines
@@ -290,7 +293,11 @@ void BackgroundDesign::DrawScoreBoard(size_t player_one_score, size_t player_two
 
   // Draws scoreboard label
   std::string scoreboard_label = "SCOREBOARD";
-  ci::gl::drawStringCentered(scoreboard_label, vec2(x_center_position,initial_x_or_y_position - y_interval * 2), "white", ci::Font());
+  ci::gl::drawStringCentered(scoreboard_label,
+                             vec2(x_center_position,
+                                  initial_x_or_y_position - y_interval * 2),
+                             "white",
+                             ci::Font());
 
   // Draws scoreboard
   ci::gl::color(ci::Color("black"));
@@ -308,8 +315,14 @@ void BackgroundDesign::DrawScoreBoard(size_t player_one_score, size_t player_two
                                        final_x_or_y_position - y_interval)));
 
   const ci::Font kLabelOneFont = ci::Font("Helvetica", 40);
-  ci::gl::drawStringCentered(std::to_string(player_one_score), vec2(x_center_position - 100,initial_x_or_y_position + y_interval * 3 + 25), "white", kLabelOneFont);
-  ci::gl::drawStringCentered(std::to_string(player_two_score), vec2(x_center_position + 100,initial_x_or_y_position + y_interval * 3 + 25), "white", kLabelOneFont);
+  ci::gl::drawStringCentered(std::to_string(player_one_score),
+                             vec2(x_center_position - 100,
+                                  initial_x_or_y_position + y_interval * 3 + 25),
+                             "white", kLabelOneFont);
+  ci::gl::drawStringCentered(std::to_string(player_two_score),
+                             vec2(x_center_position + 100,
+                                  initial_x_or_y_position + y_interval * 3 + 25),
+                             "white", kLabelOneFont);
 }
 
 size_t BackgroundDesign::getKXWindowSize() {

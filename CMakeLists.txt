@@ -49,12 +49,9 @@ get_filename_component(APP_PATH "${CMAKE_CURRENT_SOURCE_DIR}/" ABSOLUTE)
 
 include("${CINDER_PATH}/proj/cmake/modules/cinderMakeApp.cmake")
 
-list(APPEND SOURCE_FILES    src/gas_container.cc
-                            src/final_project_app.cc
-                            src/particle.cc
-                            src/histogram.cc
-                            src/background_design.cc
-        src/player.cc)
+list(APPEND SOURCE_FILES src/final_project_app.cc
+                         src/background_design.cc
+                         src/player.cc)
 
 list(APPEND TEST_FILES tests/player_test.cc)
 
