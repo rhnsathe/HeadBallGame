@@ -45,7 +45,6 @@ void BackgroundDesign::DrawLeftSideGoalposts() {
   ci::gl::rotate(M_PI - turn_value);
   double hypotenuse = sqrt(numerator*numerator + denominator*denominator);
   ci::Rectf left_rotated_rectangle = ci::Rectf (vec2(0,0), vec2(hypotenuse, rect_width));
-  left_rotated_rectangle_ = ci::Rectf (vec2(0,0), vec2(hypotenuse, rect_width));
   ci::gl::drawSolidRect(left_rotated_rectangle);
   ci::gl::popModelMatrix();
 
@@ -200,7 +199,6 @@ void BackgroundDesign::DrawRightSideGoalposts() {
   double turn_value_2 = atan(numerator/denominator);
   ci::gl::rotate((1/2)*M_PI + turn_value_2);
   double hypotenuse = sqrt(numerator*numerator + denominator*denominator);
-  right_rotated_rectangle_ = ci::Rectf(ci::Rectf(vec2(0,0), vec2(hypotenuse,rect_width)));
   ci::gl::drawSolidRect(ci::Rectf(vec2(0,0), vec2(hypotenuse,rect_width)));
   ci::gl::popModelMatrix();
 

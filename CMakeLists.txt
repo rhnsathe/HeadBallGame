@@ -56,11 +56,7 @@ list(APPEND SOURCE_FILES    src/gas_container.cc
                             src/background_design.cc
         src/player.cc)
 
-list(APPEND TEST_FILES tests/particle_test.cc
-                       tests/gas_container_test.cc
-                       tests/histogram_test.cc
-                       tests/background_design_test.cc
-                       tests/player_test.cc)
+list(APPEND TEST_FILES tests/player_test.cc)
 
 ci_make_app(
         APP_NAME        gas-simulation

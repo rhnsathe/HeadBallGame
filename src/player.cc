@@ -47,7 +47,7 @@ Player::Player(char color) {
   }
 }
 
-void Player::drawBall() {
+void Player::DrawBall() {
   double y_threshhold = 660 - kPlayerBottomRadius - (kPlayerTopRadius/2);
   if (!(ball_position_.y > y_threshhold)) {
     ball_velocity_.y += 1;
@@ -57,7 +57,7 @@ void Player::drawBall() {
   ci::gl::drawSolidCircle(ball_position_, kPlayerTopRadius);
 }
 
-void Player::drawPlayer() {
+void Player::DrawPlayer() {
   double eye_radius = 1.5;
   if (color_ == 'p' || color_ == 'P') {
     ci::gl::color(ci::Color("purple"));
@@ -78,19 +78,19 @@ void Player::drawPlayer() {
   }
 }
 
-void Player::initiateSpecialLeftKick(Player& ball) {
+void Player::InitiateSpecialLeftKick(Player& ball) {
   int special_x = -30;
   int special_y = -20;
   ball.ball_velocity_ += glm::vec2(special_x,special_y);
 }
 
-void Player::initiateSpecialRightKick(Player& ball) {
+void Player::InitiateSpecialRightKick(Player& ball) {
   int special_x = 30;
   int special_y = -20;
   ball.ball_velocity_ += glm::vec2(special_x,special_y);
 }
 
-void Player::movePlayerLeft() {
+void Player::MovePlayerLeft() {
   player_top_position_ += glm::vec2(-player_x_increment,0);
   player_bottom_position_ += glm::vec2(-player_x_increment,0);
   player_l_eye_position_ += glm::vec2(-player_x_increment,0);
@@ -101,7 +101,7 @@ void Player::movePlayerLeft() {
   player_bottom_velocity_ +=  glm::vec2(-player_x_increment,0);
 }
 
-void Player::movePlayerRight() {
+void Player::MovePlayerRight() {
   player_top_position_ += glm::vec2(player_x_increment,0);
   player_bottom_position_ += glm::vec2(player_x_increment,0);
   player_l_eye_position_ += glm::vec2(player_x_increment,0);
@@ -112,7 +112,7 @@ void Player::movePlayerRight() {
   player_bottom_velocity_ +=  glm::vec2(player_x_increment,0);
 }
 
-void Player::movePlayerUp() {
+void Player::MovePlayerUp() {
   double y_increase = -150;
   player_top_position_ += glm::vec2(0,y_increase);
   player_bottom_position_ += glm::vec2(0,y_increase);
@@ -124,7 +124,7 @@ void Player::movePlayerUp() {
   player_bottom_velocity_ +=  glm::vec2(0,-player_x_increment);
 }
 
-void Player::movePlayerWithGravity() {
+void Player::MovePlayerWithGravity() {
   double y_decrease = 7.5;
   double y_velo_decrease = 0.5;
   player_top_position_ += glm::vec2(0,y_decrease);
@@ -137,7 +137,7 @@ void Player::movePlayerWithGravity() {
   player_bottom_velocity_ +=  glm::vec2(0,y_velo_decrease);
 }
 
-bool Player::checkForCollisionWithBall(Player& player_one, Player& ball, size_t temp_disablement) {
+bool Player::CheckForCollisionWithBall(Player& player_one, Player& ball, size_t temp_disablement) {
   if (temp_disablement != 0) {
     return false;
   }
@@ -165,7 +165,7 @@ bool Player::checkForCollisionWithBall(Player& player_one, Player& ball, size_t 
   return false;
 }
 
-void Player::checkForCollisionWithWall(Player& ball) {
+void Player::CheckForCollisionWithWall(Player& ball) {
   // Checks potential collision with right vertical wall.
   if (ball.ball_position_.x + ball.kPlayerTopRadius > 1800) {
     // Ensures that the particle has a positive x velocity.
@@ -198,33 +198,43 @@ void Player::checkForCollisionWithWall(Player& ball) {
       //ball.ball_position_ += ball.ball_velocity_;
     }
   }
-  if (ball.ball_position_.y > 100 && ball.ball_position_.y < 310
-      && ball.ball_position_.x > 150 && ball.ball_position_.x < 250) {
+  size_t lower_y = 100;
+  size_t upper_y = 310;
+  size_t left_left_x = 150;
+  size_t left_right_x = 250;
+  size_t right_left_x = 1550;
+  size_t right_right_x = 1650;
+  if (ball.ball_position_.y > lower_y && ball.ball_position_.y < upper_y
+      && ball.ball_position_.x > left_left_x && ball.ball_position_.x < left_right_x) {
     if (ball.ball_velocity_.x < 0) {
       ball.ball_velocity_ = glm::vec2(-1, 1) * ball.ball_velocity_;
     }
   }
-  if (ball.ball_position_.y > 100 && ball.ball_position_.y < 310
-          && ball.ball_position_.x > 1550 && ball.ball_position_.x < 1650) {
+  if (ball.ball_position_.y > lower_y && ball.ball_position_.y < upper_y
+          && ball.ball_position_.x > right_left_x && ball.ball_position_.x < right_right_x) {
     if (ball.ball_velocity_.x > 0) {
       ball.ball_velocity_ = glm::vec2(-1, 1) * ball.ball_velocity_;
     }
   }
 }
 
-void Player::applyGravityToBall() {
-  size_t ball_y_position = 660;
-  size_t increment = 10;
-  if (ball_position_.y < ball_y_position - 12.5) {
-    ball_position_.y += increment;
+void Player::RegulatePlayerVelocity(Player& player_one) {
+  int velocity_increment = 3;
+  if (player_one.player_top_velocity_.x < 0) {
+    player_one.player_top_velocity_.x += velocity_increment;
+    player_one.player_bottom_velocity_.x += velocity_increment;
+  }
+  if (player_one.player_top_velocity_.x > 0) {
+    player_one.player_top_velocity_.x += -velocity_increment;
+    player_one.player_bottom_velocity_.x += -velocity_increment;
   }
 }
 
-double Player::getKPlayerTopRadius() {
+double Player::GetKPlayerTopRadius() {
   return kPlayerTopRadius;
 }
 
-double Player::getKPlayerBottomRadius() {
+double Player::GetKPlayerBottomRadius() {
   return kPlayerBottomRadius;
 }
 

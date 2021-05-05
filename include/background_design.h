@@ -64,9 +64,6 @@ namespace finalproject {
     */
    size_t getKXWindowSize();
 
-   ci::Rectf left_rotated_rectangle_;
-
-   ci::Rectf right_rotated_rectangle_;
   private:
    /**
     * X length of Window.
