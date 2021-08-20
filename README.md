@@ -1,0 +1,3 @@
+# HeadBallGame
+This project is a recreation of the popular mobile and web game HeadBall 2. In the game, there are two players whose aim must be to score goals, primarily using their heads. As this is a two-player game, the player on the right side moves using the arrow keys, and the player on the left moves using W,A, & D. Each player has a special power kick that they can utilize. The player on the right activates this using the "Down" arrow and the player on the left activates this using the "F" key. Whoever scores the most goals wins. Have fun! 
+This game utilizes Cinder, which means Cinder must be installed in order to play.
